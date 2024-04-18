@@ -51,33 +51,38 @@ func Soal3Model(input RequestSoal3Model) *ResponseSoal3Model {
 	result := []int{}
 
 	wordsFreq := make(map[string]int)
-	for _, word := range input.Words {
-		wordsFreq[word]++
-	}
+	for {
+		for _, word := range input.Words {
+			wordsFreq[word]++
+		}
 
-	for i := 0; i <= len(input.Substring)-totalLen; i++ {
-		substrFreq := make(map[string]int)
-		j := i
-		substr := input.Substring[j : j+totalLen]
+		for i := 0; i <= len(input.Substring)-totalLen; i++ {
+			substrFreq := make(map[string]int)
+			j := i
+			substr := input.Substring[j : j+totalLen]
 
-		for len(substr) >= wordLen {
-			word := substr[:wordLen]
-			substrFreq[word]++
-			if substrFreq[word] > wordsFreq[word] {
-				break
+			for len(substr) >= wordLen {
+				word := substr[:wordLen]
+				substrFreq[word]++
+				if substrFreq[word] > wordsFreq[word] {
+					break
+				}
+				j += wordLen
+				substr = substr[wordLen:]
 			}
-			j += wordLen
-			substr = substr[wordLen:]
+			if len(substr) == 0 {
+				result = append(result, i)
+			}
 		}
-		if len(substr) == 0 {
-			result = append(result, i)
+		if len(result) > 0 {
+			return &ResponseSoal3Model{
+				Result: result,
+				Time:   time.Since(start),
+			}
 		}
-	}
 
-	return &ResponseSoal3Model{
-		Result: result,
-		Time:   time.Since(start),
 	}
+	
 }
 
 func Soal1Model(input RequestSoal1Model) *ResponseSoal1Model {
