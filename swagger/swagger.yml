@@ -1,0 +1,106 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /object/soal1:
+    post:
+      tags:
+      - object
+      description: |-
+        create object
+        <br>
+      parameters:
+      - in: body
+        name: requestBody
+        description: Request body in JSON format
+        required: true
+        schema:
+          $ref: '#/definitions/models.RequestSoal1Model'
+      responses:
+        "200":
+          description: interfaces{}
+        "400":
+          description: bodies are empty
+  /object/soal2:
+    post:
+      tags:
+      - object
+      description: |-
+        create object
+        <br>
+      parameters:
+      - in: body
+        name: requestBody
+        description: The object content
+        required: true
+        schema:
+          $ref: '#/definitions/models.RequestSoal2Model'
+      responses:
+        "200":
+          description: interfaces{}
+        "400":
+          description: bodies are empty
+  /object/soal3:
+    post:
+      tags:
+      - object
+      description: |-
+        create object
+        <br>
+      parameters:
+      - in: body
+        name: requestBody
+        description: The object content
+        schema:
+          $ref: '#/definitions/models.RequestSoal3Model'
+      responses:
+        "200":
+          description: interfaces{}
+        "400":
+          description: bodies are empty
+definitions:
+  models.RequestSoal1Model:
+    title: RequestSoal1Model
+    type: object
+    properties:
+      nums:
+        type: array
+        items:
+          type: integer
+          format: int64
+      target:
+        type: integer
+        format: int64
+  models.RequestSoal2Model:
+    title: RequestSoal2Model
+    type: object
+    properties:
+      nums:
+        type: array
+        items:
+          type: integer
+          format: int64
+  models.RequestSoal3Model:
+    title: RequestSoal3Model
+    type: object
+    properties:
+      substring:
+        type: string
+      words:
+        type: array
+        items:
+          type: string
+tags:
+- name: object
+  description: |
+    Operations about object
